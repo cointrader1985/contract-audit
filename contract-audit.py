@@ -45,4 +45,26 @@ def build_contract():
     return c
 
 def sign_process(contract):
- 
+    sig = contract.sign("audit_key_001")
+    print("Contract ID:", contract.id)
+    print("Signature:", sig)
+    print("Verified:", contract.verify(sig, "audit_key_001"))
+    return sig
+
+def audit(contract):
+    print("\nAudit Trail:")
+    for h in contract.history:
+        print(h)
+
+def summary(contract):
+    print("\nSummary Source:", contract.source)
+
+def main():
+    contract = build_contract()
+    sign_process(contract)
+    audit(contract)
+    summary(contract)
+    print("Completed")
+
+if __name__ == "__main__":
+    main()
